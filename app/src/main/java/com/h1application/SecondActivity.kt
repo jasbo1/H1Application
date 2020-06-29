@@ -1,21 +1,30 @@
 package com.h1application
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
+import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
-    lateinit var edText2: EditText
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-        
-        edText2 = findViewById(R.id.edText2)
         val type = intent.getStringExtra("Text")
-        edText2.setText(type)
+        edReturn.setText(type)
 
+        btnBack.setOnClickListener {
+            var text = edReturn.text.toString()
+            if (text.isNotEmpty()) {
 
+                val intent = Intent()
+                intent.putExtra("Text", text)
+                setResult(RESULT_OK, intent)
+                finish()
+
+            }
+
+        }
     }
 }
